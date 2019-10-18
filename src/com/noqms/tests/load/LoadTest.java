@@ -114,6 +114,7 @@ public class LoadTest {
     public static class MyLogListener implements LogListener {
         @Override
         public void logInfo(String text) {
+            System.out.println(text);
         }
 
         @Override
