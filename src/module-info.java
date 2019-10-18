@@ -15,9 +15,8 @@
  */
 
 module com.noqms.tests {
-    requires com.noqms;
     requires gson;
-    requires java.sql; // for gson until https://github.com/google/gson/pull/1500 kicks in
+    requires com.noqms;
     
     opens com.noqms.tests.load to gson;
     opens com.noqms.tests.interaction to gson;
