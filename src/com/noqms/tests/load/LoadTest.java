@@ -46,7 +46,7 @@ public class LoadTest {
         this.dataLength = dataLength;
     }
 
-    public void run() {
+    public void run() throws Exception {
         MyLogListener logListener = new MyLogListener();
         MicroService incoming = startMicroIncoming(dataLength, logListener);
 
@@ -71,7 +71,7 @@ public class LoadTest {
         }
     }
 
-    private void startMicroTest(String name, int threads, int dataLength, LogListener logListener) {
+    private void startMicroTest(String name, int threads, int dataLength, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "LoadTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, name);
@@ -81,11 +81,10 @@ public class LoadTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, String.valueOf(dataLength));
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, String.valueOf(dataLength));
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.load.LoadTest$MyLogListener");
-        Runner.start(props);
+        Runner.start(props, logListener);
     }
 
-    private MicroService startMicroIncoming(int dataLength, LogListener logListener) {
+    private MicroService startMicroIncoming(int dataLength, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "LoadTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
@@ -95,8 +94,7 @@ public class LoadTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, String.valueOf(dataLength));
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, String.valueOf(dataLength));
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.load.LoadTest$MyLogListener");
-        return Runner.start(props);
+        return Runner.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {

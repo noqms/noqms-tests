@@ -42,7 +42,7 @@ public class DistributionTest {
         this.messages = messages;
     }
 
-    public void run() {
+    public void run() throws Exception {
         MyLogListener logListener = new MyLogListener();
         MicroService incoming = startIncoming(logListener);
 
@@ -64,7 +64,7 @@ public class DistributionTest {
     private static class Model {
     }
 
-    private void startMicroTest(int threads, LogListener logListener) {
+    private void startMicroTest(int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "DistributionTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Distribution");
@@ -74,11 +74,10 @@ public class DistributionTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.distribution.DistributionTest$MyLogListener");
-        Runner.start(props);
+        Runner.start(props, logListener);
     }
 
-    private MicroService startIncoming(LogListener logListener) {
+    private MicroService startIncoming(LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "DistributionTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
@@ -88,8 +87,7 @@ public class DistributionTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.distribution.DistributionTest$MyLogListener");
-        return Runner.start(props);
+        return Runner.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {

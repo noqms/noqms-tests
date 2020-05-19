@@ -39,7 +39,7 @@ public class RoundTripTest {
         this.threads = threads;
     }
 
-    public void run() {
+    public void run() throws Exception {
         AtomicInteger requestsAtom = new AtomicInteger();
         MyLogListener logListener = new MyLogListener();
         long oneMinuteMillis = TimeUnit.MINUTES.toMillis(1);
@@ -89,7 +89,7 @@ public class RoundTripTest {
         }
     }
 
-    private void startMicroTest(int threads, LogListener logListener) {
+    private void startMicroTest(int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "RoundTripTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Test");
@@ -99,11 +99,10 @@ public class RoundTripTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "0");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "0");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MyLogListener");
-        Runner.start(props);
+        Runner.start(props, logListener);
     }
 
-    private MicroService startMicroIncoming(LogListener logListener) {
+    private MicroService startMicroIncoming(LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "RoundTripTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
@@ -113,8 +112,7 @@ public class RoundTripTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MyLogListener");
-        return Runner.start(props);
+        return Runner.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {

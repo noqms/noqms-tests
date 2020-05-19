@@ -30,6 +30,10 @@ public class Run_DistributionTest {
         int messages = 100;
 
         DistributionTest test = new DistributionTest(microServiceInstances, threadsPerMicroService, messages);
-        test.run();
+        try {
+            test.run();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

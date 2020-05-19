@@ -18,15 +18,9 @@ module com.noqms.tests {
     requires gson;
     requires com.noqms;
     
-    opens com.noqms.tests.load to gson;
-    opens com.noqms.tests.interaction to gson;
-    opens com.noqms.tests.roundtrip to gson;
-    opens com.noqms.tests.tweedle to gson;
-    opens com.noqms.tests.distribution to gson;
-    
-    exports com.noqms.tests.load to com.noqms;
-    exports com.noqms.tests.interaction to com.noqms;
-    exports com.noqms.tests.roundtrip to com.noqms;
-    exports com.noqms.tests.tweedle to com.noqms;
-    exports com.noqms.tests.distribution to com.noqms;
+    opens com.noqms.tests.load to gson, com.noqms;
+    opens com.noqms.tests.interaction to gson, com.noqms;
+    opens com.noqms.tests.roundtrip to gson, com.noqms;
+    opens com.noqms.tests.tweedle to gson, com.noqms;
+    opens com.noqms.tests.distribution to gson, com.noqms;
 }

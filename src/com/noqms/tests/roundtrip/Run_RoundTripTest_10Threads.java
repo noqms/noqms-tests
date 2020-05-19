@@ -28,6 +28,10 @@ public class Run_RoundTripTest_10Threads {
         int threads = 10;
 
         RoundTripTest test = new RoundTripTest(threads);
-        test.run();
+        try {
+            test.run();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

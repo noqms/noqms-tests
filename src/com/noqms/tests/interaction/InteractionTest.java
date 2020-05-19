@@ -44,7 +44,7 @@ public class InteractionTest {
         this.messages = messages;
     }
 
-    public void run() {
+    public void run() throws Exception {
         MyLogListener logListener = new MyLogListener();
         MicroService incoming = startIncoming(logListener);
 
@@ -71,7 +71,7 @@ public class InteractionTest {
         private int microServices;
     }
 
-    private void startMicroTest(String name, int threads, LogListener logListener) {
+    private void startMicroTest(String name, int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "InteractionTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, name);
@@ -81,11 +81,10 @@ public class InteractionTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.interaction.InteractionTest$MyLogListener");
-        Runner.start(props);
+        Runner.start(props, logListener);
     }
 
-    private MicroService startIncoming(LogListener logListener) {
+    private MicroService startIncoming(LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "InteractionTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
@@ -95,8 +94,7 @@ public class InteractionTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        props.setProperty(Runner.ARG_LOG_LISTENER_PATH, "com.noqms.tests.interaction.InteractionTest$MyLogListener");
-        return Runner.start(props);
+        return Runner.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {

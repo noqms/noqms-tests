@@ -30,6 +30,10 @@ public class Run_InteractionTest {
         int messages = 100;
 
         InteractionTest test = new InteractionTest(microServices, threadsPerMicroService, messages);
-        test.run();
+        try {
+            test.run();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

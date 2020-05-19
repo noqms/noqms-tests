@@ -30,7 +30,11 @@ public class Run_LoadTest_1MicroService_100Threads_50KPerMsg_10MsgsPerMillisecon
         int messagesPerMilliSecond = 10;
         int dataLength = 50000;
 
-        LoadTest loadTest = new LoadTest( microServices, threadsPerMicroService, messagesPerMilliSecond, dataLength);
-        loadTest.run();
+        LoadTest test = new LoadTest(microServices, threadsPerMicroService, messagesPerMilliSecond, dataLength);
+        try {
+            test.run();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }
