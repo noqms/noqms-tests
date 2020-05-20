@@ -47,13 +47,15 @@ public class InteractionTest {
     public void run() throws Exception {
         MyLogListener logListener = new MyLogListener();
         MicroService incoming = startIncoming(logListener);
+        
+        MicroService[] micros = new MicroService[microServices];
 
         for (int ix = 1; ix <= microServices; ix++) {
             String microServiceName = "MS#" + String.valueOf(ix);
-            startMicroTest(microServiceName, threadsPerMicroService, logListener);
+            micros[ix-1] = startMicroTest(microServiceName, threadsPerMicroService, logListener);
         }
 
-        // load up messages in the system and let them bounce around for a minute
+        // load up messages in the system and let them bounce around
 
         Model model = new Model();
         model.microServices = microServices;
@@ -63,15 +65,25 @@ public class InteractionTest {
             incoming.sendRequestExpectResponse(microServiceName, data);
             sleepMillis(1);
         }
-
-        sleepMillis(TimeUnit.MINUTES.toMillis(1));
+        
+        sleepMillis(TimeUnit.SECONDS.toMillis(30));
+        
+        micros[0].drain();
+        
+        for (int ix = 0; ix < messages; ix += 10) {
+            String microServiceName = "MS#" + String.valueOf(1 + random.nextInt(microServices));
+            incoming.sendRequestExpectResponse(microServiceName, data);
+            sleepMillis(1);
+        }
+        
+        sleepMillis(TimeUnit.SECONDS.toMillis(30));
     }
 
     private static class Model {
         private int microServices;
     }
 
-    private void startMicroTest(String name, int threads, LogListener logListener) throws Exception {
+    private MicroService startMicroTest(String name, int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
         props.setProperty(Runner.ARG_GROUP_NAME, "InteractionTest");
         props.setProperty(Runner.ARG_SERVICE_NAME, name);
@@ -81,7 +93,7 @@ public class InteractionTest {
         props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        Runner.start(props, logListener);
+        return Runner.start(props, logListener);
     }
 
     private MicroService startIncoming(LogListener logListener) throws Exception {
@@ -119,16 +131,21 @@ public class InteractionTest {
 
         @Override
         public void logWarn(String text) {
-            System.exit(-1); // end the test
+            System.err.println("Expecting service is not responsive: " + text);
+            sleepMillis(100);
         }
 
         @Override
         public void logError(String text, Throwable th) {
+            System.err.println(text);
+            sleepMillis(100);
             System.exit(-1); // end the test
         }
 
         @Override
         public void logFatal(String text, Throwable th) {
+            System.err.println(text);
+            sleepMillis(100);
             System.exit(-1); // end the test
         }
     }
