@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 import com.google.gson.Gson;
 import com.noqms.LogListener;
 import com.noqms.MicroService;
-import com.noqms.Runner;
+import com.noqms.Starter;
 
 // This is a self-contained test and may run many microservices in the same process. 
 // Under normal circumstances a microservice is hosted singularly in its own (virtual) environment.
@@ -86,28 +86,28 @@ public class InteractionTest {
 
     private MicroService startMicroTest(String name, int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
-        props.setProperty(Runner.ARG_GROUP_NAME, "InteractionTest");
-        props.setProperty(Runner.ARG_SERVICE_NAME, name);
-        props.setProperty(Runner.ARG_SERVICE_PATH, "com.noqms.tests.interaction.InteractionTest$MicroTest");
-        props.setProperty(Runner.ARG_THREADS, String.valueOf(threads));
-        props.setProperty(Runner.ARG_TYPICAL_MILLIS, "10");
-        props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        return Runner.start(props, logListener);
+        props.setProperty(Starter.ARG_GROUP_NAME, "InteractionTest");
+        props.setProperty(Starter.ARG_SERVICE_NAME, name);
+        props.setProperty(Starter.ARG_SERVICE_PATH, "com.noqms.tests.interaction.InteractionTest$MicroTest");
+        props.setProperty(Starter.ARG_THREADS, String.valueOf(threads));
+        props.setProperty(Starter.ARG_TYPICAL_MILLIS, "10");
+        props.setProperty(Starter.ARG_TIMEOUT_MILLIS, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_IN_BYTES, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_OUT_BYTES, "100");
+        return Starter.start(props, logListener);
     }
 
     private MicroService startIncoming(LogListener logListener) throws Exception {
         Properties props = new Properties();
-        props.setProperty(Runner.ARG_GROUP_NAME, "InteractionTest");
-        props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
-        props.setProperty(Runner.ARG_SERVICE_PATH, "com.noqms.tests.interaction.InteractionTest$MicroIncoming");
-        props.setProperty(Runner.ARG_THREADS, "1");
-        props.setProperty(Runner.ARG_TYPICAL_MILLIS, "10");
-        props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        return Runner.start(props, logListener);
+        props.setProperty(Starter.ARG_GROUP_NAME, "InteractionTest");
+        props.setProperty(Starter.ARG_SERVICE_NAME, "Incoming");
+        props.setProperty(Starter.ARG_SERVICE_PATH, "com.noqms.tests.interaction.InteractionTest$MicroIncoming");
+        props.setProperty(Starter.ARG_THREADS, "1");
+        props.setProperty(Starter.ARG_TYPICAL_MILLIS, "10");
+        props.setProperty(Starter.ARG_TIMEOUT_MILLIS, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_IN_BYTES, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_OUT_BYTES, "100");
+        return Starter.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {

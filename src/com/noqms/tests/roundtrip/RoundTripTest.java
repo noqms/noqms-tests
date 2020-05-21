@@ -26,7 +26,7 @@ import com.noqms.LogListener;
 import com.noqms.MicroService;
 import com.noqms.RequestStatus;
 import com.noqms.ResponseFuture;
-import com.noqms.Runner;
+import com.noqms.Starter;
 
 // This is a self-contained test and may run many microservices in the same process. 
 // Under normal circumstances a microservice is hosted singularly in its own (virtual) environment.
@@ -91,28 +91,28 @@ public class RoundTripTest {
 
     private void startMicroTest(int threads, LogListener logListener) throws Exception {
         Properties props = new Properties();
-        props.setProperty(Runner.ARG_GROUP_NAME, "RoundTripTest");
-        props.setProperty(Runner.ARG_SERVICE_NAME, "Test");
-        props.setProperty(Runner.ARG_SERVICE_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MicroTest");
-        props.setProperty(Runner.ARG_THREADS, String.valueOf(threads));
-        props.setProperty(Runner.ARG_TYPICAL_MILLIS, "10");
-        props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "0");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "0");
-        Runner.start(props, logListener);
+        props.setProperty(Starter.ARG_GROUP_NAME, "RoundTripTest");
+        props.setProperty(Starter.ARG_SERVICE_NAME, "Test");
+        props.setProperty(Starter.ARG_SERVICE_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MicroTest");
+        props.setProperty(Starter.ARG_THREADS, String.valueOf(threads));
+        props.setProperty(Starter.ARG_TYPICAL_MILLIS, "10");
+        props.setProperty(Starter.ARG_TIMEOUT_MILLIS, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_IN_BYTES, "0");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_OUT_BYTES, "0");
+        Starter.start(props, logListener);
     }
 
     private MicroService startMicroIncoming(LogListener logListener) throws Exception {
         Properties props = new Properties();
-        props.setProperty(Runner.ARG_GROUP_NAME, "RoundTripTest");
-        props.setProperty(Runner.ARG_SERVICE_NAME, "Incoming");
-        props.setProperty(Runner.ARG_SERVICE_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MicroIncoming");
-        props.setProperty(Runner.ARG_THREADS, "1");
-        props.setProperty(Runner.ARG_TYPICAL_MILLIS, "10");
-        props.setProperty(Runner.ARG_TIMEOUT_MILLIS, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_IN_BYTES, "100");
-        props.setProperty(Runner.ARG_MAX_MESSAGE_OUT_BYTES, "100");
-        return Runner.start(props, logListener);
+        props.setProperty(Starter.ARG_GROUP_NAME, "RoundTripTest");
+        props.setProperty(Starter.ARG_SERVICE_NAME, "Incoming");
+        props.setProperty(Starter.ARG_SERVICE_PATH, "com.noqms.tests.roundtrip.RoundTripTest$MicroIncoming");
+        props.setProperty(Starter.ARG_THREADS, "1");
+        props.setProperty(Starter.ARG_TYPICAL_MILLIS, "10");
+        props.setProperty(Starter.ARG_TIMEOUT_MILLIS, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_IN_BYTES, "100");
+        props.setProperty(Starter.ARG_MAX_MESSAGE_OUT_BYTES, "100");
+        return Starter.start(props, logListener);
     }
 
     public static class MicroIncoming extends MicroService {
