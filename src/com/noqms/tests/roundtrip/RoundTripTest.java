@@ -127,6 +127,11 @@ public class RoundTripTest {
 
     public static class MyLogListener implements LogListener {
         @Override
+        public void logDebug(String text) {
+            System.out.println(text);
+        }
+        
+        @Override
         public void logInfo(String text) {
             System.out.println(text);
         }
@@ -138,11 +143,6 @@ public class RoundTripTest {
 
         @Override
         public void logError(String text, Throwable th) {
-            System.exit(-1); // end the test
-        }
-
-        @Override
-        public void logFatal(String text, Throwable th) {
             System.exit(-1); // end the test
         }
     }
