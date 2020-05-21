@@ -47,12 +47,12 @@ public class InteractionTest {
     public void run() throws Exception {
         MyLogListener logListener = new MyLogListener();
         MicroService incoming = startIncoming(logListener);
-        
+
         MicroService[] micros = new MicroService[microServices];
 
         for (int ix = 1; ix <= microServices; ix++) {
             String microServiceName = "MS#" + String.valueOf(ix);
-            micros[ix-1] = startMicroTest(microServiceName, threadsPerMicroService, logListener);
+            micros[ix - 1] = startMicroTest(microServiceName, threadsPerMicroService, logListener);
         }
 
         // load up messages in the system and let them bounce around
@@ -65,17 +65,18 @@ public class InteractionTest {
             incoming.sendRequestExpectResponse(microServiceName, data);
             sleepMillis(1);
         }
-        
+
         sleepMillis(TimeUnit.SECONDS.toMillis(30));
-        
+
+        // drain one service so that it eventually shows as unresponsive - there is no replacement service
         micros[0].drain();
-        
+
         for (int ix = 0; ix < messages; ix += 10) {
             String microServiceName = "MS#" + String.valueOf(1 + random.nextInt(microServices));
             incoming.sendRequestExpectResponse(microServiceName, data);
             sleepMillis(1);
         }
-        
+
         sleepMillis(TimeUnit.SECONDS.toMillis(30));
     }
 
@@ -128,7 +129,7 @@ public class InteractionTest {
         public void logDebug(String text) {
             System.out.println(text);
         }
-        
+
         @Override
         public void logInfo(String text) {
             System.out.println(text);
@@ -136,8 +137,13 @@ public class InteractionTest {
 
         @Override
         public void logWarn(String text) {
-            System.err.println("Expecting service is not responsive: " + text);
-            sleepMillis(100);
+            if (text.contains("is not responsive: MS#1"))
+                System.out.println("Expecting service is not responsive: " + text);
+            else {
+                System.err.println(text);
+                sleepMillis(100);
+                System.exit(-1); // end the test
+            }
         }
 
         @Override
