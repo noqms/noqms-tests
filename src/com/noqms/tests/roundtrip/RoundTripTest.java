@@ -120,7 +120,7 @@ public class RoundTripTest {
 
     public static class MicroTest extends MicroService {
         @Override
-        public void processRequest(Long requestId, String serviceNameFrom, byte[] data) {
+        public void processRequest(Long requestId, String serviceNameFrom, byte[] data, int threadIndex) {
             sendResponse(requestId, null, null, null, null);
         }
     }

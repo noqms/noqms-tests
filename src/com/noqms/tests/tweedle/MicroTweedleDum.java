@@ -61,7 +61,7 @@ public class MicroTweedleDum extends MicroService {
     }
 
     @Override
-    public void processRequest(Long requestId, String serviceNameFrom, byte[] data) {
+    public void processRequest(Long requestId, String serviceNameFrom, byte[] data, int threadIndex) {
         ModelRequest request = gson.fromJson(new String(data, StandardCharsets.UTF_8), ModelRequest.class);
 
         if (requestId != null) {

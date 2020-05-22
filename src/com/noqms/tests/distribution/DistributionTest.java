@@ -95,7 +95,7 @@ public class DistributionTest {
 
     public static class MicroTest extends MicroService {
         @Override
-        public void processRequest(Long requestId, String serviceNameFrom, byte[] data) {
+        public void processRequest(Long requestId, String serviceNameFrom, byte[] data, int threadIndex) {
             sendResponse(requestId, null, null, null, null);
             Model model = gson.fromJson(new String(data, StandardCharsets.UTF_8), Model.class);
             data = gson.toJson(model).getBytes(StandardCharsets.UTF_8);

@@ -102,7 +102,7 @@ public class LoadTest {
 
     public static class MicroTest extends MicroService {
         @Override
-        public void processRequest(Long requestId, String serviceNameFrom, byte[] data) {
+        public void processRequest(Long requestId, String serviceNameFrom, byte[] data, int threadIndex) {
             sleepMillis(new Random().nextInt(10));
             sendResponse(requestId, null, null, null, data);
             requestsAtom.incrementAndGet();
