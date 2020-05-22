@@ -122,11 +122,15 @@ public class LoadTest {
 
         @Override
         public void logWarn(String text) {
+            System.err.println(text);
+            sleepMillis(100);
             System.exit(-1); // end the test
         }
 
         @Override
         public void logError(String text, Throwable th) {
+            System.err.println(text);
+            sleepMillis(100);
             System.exit(-1); // end the test
         }
     }
