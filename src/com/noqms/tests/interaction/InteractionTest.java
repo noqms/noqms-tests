@@ -126,17 +126,17 @@ public class InteractionTest {
 
     public static class MyLogListener implements LogListener {
         @Override
-        public void logDebug(String text) {
+        public void debug(String text) {
             System.out.println(text);
         }
 
         @Override
-        public void logInfo(String text) {
+        public void info(String text) {
             System.out.println(text);
         }
 
         @Override
-        public void logWarn(String text) {
+        public void warn(String text) {
             if (text.contains("is not responsive: MS#1"))
                 System.out.println("Expecting service is not responsive: " + text);
             else {
@@ -147,7 +147,7 @@ public class InteractionTest {
         }
 
         @Override
-        public void logError(String text, Throwable th) {
+        public void error(String text, Throwable th) {
             System.err.println(text);
             sleepMillis(100);
             System.exit(-1); // end the test

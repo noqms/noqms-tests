@@ -111,24 +111,24 @@ public class LoadTest {
 
     public static class MyLogListener implements LogListener {
         @Override
-        public void logDebug(String text) {
+        public void debug(String text) {
             System.out.println(text);
         }
         
         @Override
-        public void logInfo(String text) {
+        public void info(String text) {
             System.out.println(text);
         }
 
         @Override
-        public void logWarn(String text) {
+        public void warn(String text) {
             System.err.println(text);
             sleepMillis(100);
             System.exit(-1); // end the test
         }
 
         @Override
-        public void logError(String text, Throwable th) {
+        public void error(String text, Throwable th) {
             System.err.println(text);
             sleepMillis(100);
             System.exit(-1); // end the test
