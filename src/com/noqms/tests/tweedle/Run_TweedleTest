@@ -18,9 +18,9 @@ Compile the tests, including this one, into a jar file and put the jar file in t
 cd to that directory and execute the following commands:
 
 Terminal #1 (or background process)   
-java -server -cp xCPx com.noqms.SimpleRunner groupName=TweedleTest serviceName="Tweedle Dee" servicePath=com.noqms.tests.tweedle.MicroTweedleDee threads=10 typicalMillis=100 timeoutMillis=1000 maxMessageOutBytes=100 maxMessageInBytes=100
+java -server -cp xCPx com.noqms.SimpleRunner groupName=TweedleTest serviceName="Tweedle Dee" servicePath=com.noqms.tests.tweedle.MicroTweedleDee threads=10 timeoutMillis=1000 maxMessageOutBytes=100 maxMessageInBytes=100
 
 Terminal #2 (or background process)
-java -server -cp xCPx com.noqms.SimpleRunner groupName=TweedleTest serviceName="Tweedle Dum" servicePath=com.noqms.tests.tweedle.MicroTweedleDum threads=10 typicalMillis=100 timeoutMillis=1000 maxMessageOutBytes=100 maxMessageInBytes=100
+java -server -cp xCPx com.noqms.SimpleRunner groupName=TweedleTest serviceName="Tweedle Dum" servicePath=com.noqms.tests.tweedle.MicroTweedleDum threads=10 timeoutMillis=1000 maxMessageOutBytes=100 maxMessageInBytes=100
 
 NOTE: xCPx is *:. for Linux and *;. for Windows
