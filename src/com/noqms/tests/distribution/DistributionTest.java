@@ -70,7 +70,6 @@ public class DistributionTest {
         props.setProperty(Starter.PROP_SERVICE_NAME, "Distribution");
         props.setProperty(Starter.PROP_SERVICE_PATH, "com.noqms.tests.distribution.DistributionTest$MicroTest");
         props.setProperty(Starter.PROP_THREADS, String.valueOf(threads));
-        props.setProperty(Starter.PROP_TYPICAL_MILLIS, "10");
         props.setProperty(Starter.PROP_TIMEOUT_MILLIS, "100");
         props.setProperty(Starter.PROP_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Starter.PROP_MAX_MESSAGE_OUT_BYTES, "100");
@@ -83,7 +82,6 @@ public class DistributionTest {
         props.setProperty(Starter.PROP_SERVICE_NAME, "Incoming");
         props.setProperty(Starter.PROP_SERVICE_PATH, "com.noqms.tests.distribution.DistributionTest$MicroIncoming");
         props.setProperty(Starter.PROP_THREADS, "1");
-        props.setProperty(Starter.PROP_TYPICAL_MILLIS, "10");
         props.setProperty(Starter.PROP_TIMEOUT_MILLIS, "100");
         props.setProperty(Starter.PROP_MAX_MESSAGE_IN_BYTES, "100");
         props.setProperty(Starter.PROP_MAX_MESSAGE_OUT_BYTES, "100");
