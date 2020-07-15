@@ -18,8 +18,7 @@ package com.noqms.tests.roundtrip;
 
 // Compile the tests, including this one, into a jar file and put the jar file in the same directory as noqms jar and gson jar.
 // cd to that directory and execute the following command:
-// java -server -cp xCPX com.noqms.tests.roundtrip.Run_RoundTripTest_10Threads
-//    (xCPx is *:. for Linux and *;. for Windows)
+// java -server -cp * com.noqms.tests.roundtrip.Run_RoundTripTest_10Threads
 
 // This test can also be directly run from an IDE.
 

@@ -18,8 +18,7 @@ package com.noqms.tests.distribution;
 
 // Compile the tests, including this one, into a jar file and put the jar file in the same directory as noqms jar and gson jar.
 // cd to that directory and execute the following command:
-// java -server -cp xCPx com.noqms.tests.interaction.Run_InteractionTest
-//    (xCPx is *:. for Linux and *;. for Windows)
+// java -server -cp * com.noqms.tests.interaction.Run_InteractionTest
 
 // This test can also be directly run from an IDE.
 

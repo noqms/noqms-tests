@@ -18,8 +18,7 @@ package com.noqms.tests.load;
 
 // Compile the tests, including this one, into a jar file and put the jar file in the same directory as noqms jar and gson jar.
 // cd to that directory and execute the following command:
-// java -server -cp xCPx com.noqms.tests.load.Run_LoadTest_1MicroService_100Threads_50KPerMsg_10MsgsPerMillisecond
-//    (xCPx is *:. for Linux and *;. for Windows)
+// java -server -cp * com.noqms.tests.load.Run_LoadTest_1MicroService_100Threads_50KPerMsg_10MsgsPerMillisecond
 
 // This test can also be directly run from an IDE.
 
